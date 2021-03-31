@@ -32,6 +32,13 @@ namespace Alg_Lab2
 
         private void AddInTree(TwoThreeFourTree tree, TreeNode parent = null)
         {
+            if (tree == null)
+            {
+                if (checkBox1.Checked)
+                    parent.Nodes.Add(new TreeNode("[]"));
+                return;
+
+            }
             string text ="(";
             for (int i = 0; i < tree.Values.Count; i++)
             {
@@ -52,14 +59,18 @@ namespace Alg_Lab2
             }
 
             parent = node;
-            if (tree.Children[0] != null)
-                AddInTree(tree.Children[0], parent);
-            if (tree.Children[1] != null)
-                AddInTree(tree.Children[1], parent);
-            if (tree.Children[2] != null)
-                AddInTree(tree.Children[2], parent);
-            if (tree.Children[3] != null)
-                AddInTree(tree.Children[3], parent);
+            //if (tree.Children[0] != null)
+            //    AddInTree(tree.Children[0], parent);
+            //if (tree.Children[1] != null)
+            //    AddInTree(tree.Children[1], parent);
+            //if (tree.Children[2] != null)
+            //    AddInTree(tree.Children[2], parent);
+            //if (tree.Children[3] != null)
+            //    AddInTree(tree.Children[3], parent);
+            for(int i=0;i< tree.Children.Length;i++)
+            {
+                AddInTree(tree.Children[i], parent);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -69,6 +80,11 @@ namespace Alg_Lab2
                 tree = new TwoThreeFourTree(value);
             else
                 TwoThreeFourTree.Add(value,tree);
+            RenderTree();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             RenderTree();
         }
     }

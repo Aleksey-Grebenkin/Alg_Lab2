@@ -129,8 +129,26 @@ namespace Alg_Lab2
                         {
                             tree.Children[i] = null;
                         }
-                        tree.Children[0] = tree1;
-                        tree.Children[3] = tree2;
+                        //tree.Children[0] = tree1;
+                        //tree.Children[3] = tree2;
+                        int k = 0;
+                        for (int i = 0; i < tree.Children.Length; i++)
+                        {
+                            if (tree.Children[i] == null)
+                            {
+                                tree.Children[i] = tree1;
+                                k = i;
+                                break;
+                            }
+                        }
+                        for (int i = k; i < tree.Children.Length; i++)
+                        {
+                            if (tree.Children[i] == null)
+                            {
+                                tree.Children[i] = tree2;
+                                break;
+                            }
+                        }
 
                     }
                     else
@@ -156,15 +174,34 @@ namespace Alg_Lab2
                         var tree1 = new TwoThreeFourTree(vals[0], tree.Parent);
                         var tree2 = new TwoThreeFourTree(vals[2], tree.Parent);
 
+                        int k=0;
+                        for (int i= 0; i < tree.Children.Length; i++)
+                        {
+                            if (tree.Parent.Children[i]==null)
+                            {
+                                tree.Parent.Children[i] = tree1;
+                                k = i;
+                                break;
+                            }
+                        }
+                        for (int i=k ;i < tree.Children.Length; i++)
+                        {
+                            if (tree.Parent.Children[i] == null)
+                            {
+                                tree.Parent.Children[i] = tree2;
+                                break;
+                            }
+                        }
+
                         //TODO: Проверить что все правильно
-                        if (tree.Parent.Children[0] == null)
-                            tree.Parent.Children[0] = tree1;
-                        else
-                            tree.Parent.Children[1] = tree1;
-                        if (tree.Parent.Children[3] == null)
-                            tree.Parent.Children[3] = tree2;
-                        else
-                            tree.Parent.Children[2] = tree2;
+                        //if (tree.Parent.Children[0] == null)
+                        //    tree.Parent.Children[0] = tree1;
+                        //else
+                        //    tree.Parent.Children[1] = tree1;
+                        //if (tree.Parent.Children[3] == null)
+                        //    tree.Parent.Children[3] = tree2;
+                        //else
+                        //    tree.Parent.Children[2] = tree2;
 
                         tree1.Children[0] = tree.Children[0];
                         tree1.Children[3] = tree.Children[1];
@@ -187,6 +224,7 @@ namespace Alg_Lab2
                     }
                     break;
             }
+            int n=0;
             for(int i=0;i<tree.Values.Count;i++)
             {
                 if (value<tree.Values[i])
@@ -195,16 +233,17 @@ namespace Alg_Lab2
                         Add(value,tree.Children[i]);
                     else
                     {
-                        //tree.Children[i] = new TwoThreeFourTree(value, tree);
+                        tree.Children[i] = new TwoThreeFourTree(value, tree);
                     }
                     return;
                 }
+                n = i;
             }
-            if (tree.Children[3] != null)
-                Add(value, tree.Children[3]);
+            if (tree.Children[n+1] != null)
+                Add(value, tree.Children[n+1]);
             else
             {
-               // tree.Children[3] = new TwoThreeFourTree(value, tree);
+                tree.Children[n+1] = new TwoThreeFourTree(value, tree);
             }
 
 
