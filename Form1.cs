@@ -12,6 +12,7 @@ namespace Alg_Lab2
 {
     public partial class Form1 : Form
     {
+        int counter = 1;
         TwoThreeFourTree tree;
         public Form1()
         {
@@ -85,6 +86,16 @@ namespace Alg_Lab2
 
         private void button2_Click(object sender, EventArgs e)
         {
+            RenderTree();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int value = counter++;
+            if (tree == null)
+                tree = new TwoThreeFourTree(value);
+            else
+                TwoThreeFourTree.Add(value, tree);
             RenderTree();
         }
     }

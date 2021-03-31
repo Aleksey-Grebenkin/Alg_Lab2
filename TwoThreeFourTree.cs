@@ -120,10 +120,10 @@ namespace Alg_Lab2
                             tree.Children[3].Parent = tree2;
 
                         tree1.Children[0] = tree.Children[0];
-                        tree1.Children[3] = tree.Children[1];
+                        tree1.Children[1] = tree.Children[1];
 
                         tree2.Children[0] = tree.Children[2];
-                        tree2.Children[3] = tree.Children[3];
+                        tree2.Children[1] = tree.Children[3];
                         //TODO: Проверить что все правильно
                         for (int i = 0; i < tree.Children.Length; i++)
                         {
@@ -204,10 +204,10 @@ namespace Alg_Lab2
                         //    tree.Parent.Children[2] = tree2;
 
                         tree1.Children[0] = tree.Children[0];
-                        tree1.Children[3] = tree.Children[1];
+                        tree1.Children[1] = tree.Children[1];
 
                         tree2.Children[0] = tree.Children[2];
-                        tree2.Children[3] = tree.Children[3];
+                        tree2.Children[1] = tree.Children[3];
 
                         tree = tree.Parent;
                     }
