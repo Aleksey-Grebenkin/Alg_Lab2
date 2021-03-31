@@ -25,15 +25,22 @@ namespace Alg_Lab2
             treeView1.BeginUpdate();
             treeView1.Nodes.Clear();
             if (tree != null)
-                AddInTree(tree);
+                AddInTree(TwoThreeFourTree.GetHead(tree));
             treeView1.EndUpdate();
             treeView1.ExpandAll();
         }
 
         private void AddInTree(TwoThreeFourTree tree, TreeNode parent = null)
         {
-            var node = new TreeNode("("+tree.ValueLeft.ToString()+","+ tree.ValueMiddle.ToString() + "," + tree.ValueRight.ToString() + ")");
-            node.ForeColor = Color.White;
+            string text ="(";
+            for (int i = 0; i < tree.Values.Count; i++)
+            {
+                text += tree.Values[i];
+                if (i != tree.Values.Count-1)
+                    text += ";";
+            }
+            text += ")";
+            var node = new TreeNode(text);
 
             if (tree.Parent == null)
             {
@@ -43,15 +50,16 @@ namespace Alg_Lab2
             {
                 parent.Nodes.Add(node);
             }
+
             parent = node;
-            if (tree.Left != null)
-                AddInTree(tree.Left, parent);
-            if (tree.MiddleLeft != null)
-                AddInTree(tree.MiddleLeft, parent);
-            if (tree.MiddleRight != null)
-                AddInTree(tree.MiddleRight, parent);
-            if (tree.Right != null)
-                AddInTree(tree.Right, parent);
+            if (tree.Children[0] != null)
+                AddInTree(tree.Children[0], parent);
+            if (tree.Children[1] != null)
+                AddInTree(tree.Children[1], parent);
+            if (tree.Children[2] != null)
+                AddInTree(tree.Children[2], parent);
+            if (tree.Children[3] != null)
+                AddInTree(tree.Children[3], parent);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -60,7 +68,7 @@ namespace Alg_Lab2
             if (tree == null)
                 tree = new TwoThreeFourTree(value);
             else
-                tree.Add(value);
+                TwoThreeFourTree.Add(value,tree);
             RenderTree();
         }
     }
